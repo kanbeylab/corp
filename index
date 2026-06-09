@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>株式会社勘兵衛</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #1c1c1c;
+      --paper:  #f5f2ed;
+      --warm:   #e8e0d0;
+      --gold:   #8a6d3b;
+      --gold-l: #c4a35a;
+      --gray:   #6b6560;
+      --white:  #fdfaf6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      overflow-x: hidden;
+      line-height: 1.9;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .serif { font-family: 'Noto Serif JP', serif; }
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 88px 0; }
+
+    /* ── 罫線装飾 ── */
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--ink);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 16px;
+      margin-bottom: 48px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 48px; height: 2px;
+      background: var(--gold);
+    }
+
+    /* ════════════════════════
+       HEADER / NAV
+    ════════════════════════ */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(245, 242, 237, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--warm);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .logo {
+      height: 52px;
+      width: auto;
+    }
+    nav { display: flex; gap: 32px; }
+    nav a {
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      color: var(--gray);
+      position: relative;
+      padding-bottom: 2px;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    nav a:hover::after { width: 100%; }
+    nav a:hover { color: var(--gold); }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+
+    @media(max-width: 640px) {
+      .hamburger { display: flex; }
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: var(--paper);
+        flex-direction: column;
+        gap: 0;
+        border-top: 1px solid var(--warm);
+        padding: 8px 0 16px;
+      }
+      nav.open { display: flex; }
+      nav a { padding: 12px 32px; font-size: 0.95rem; }
+      nav a::after { display: none; }
+    }
+
+    /* ════════════════════════
+       HERO
+    ════════════════════════ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 560px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 80px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('images/hero.jpg') center center / cover no-repeat;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.12) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.55) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      padding: 0 40px;
+    }
+    .hero-sub {
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      letter-spacing: 0.25em;
+      opacity: 0.85;
+      margin-bottom: 12px;
+      font-family: 'Noto Serif JP', serif;
+    }
+    .hero-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      line-height: 1.35;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .hero-line {
+      width: 48px;
+      height: 1px;
+      background: rgba(255,255,255,0.6);
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      writing-mode: vertical-rl;
+    }
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,0.5);
+      animation: scrollDown 2s ease-in-out infinite;
+    }
+    @keyframes scrollDown {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ════════════════════════
+       ABOUT
+    ════════════════════════ */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media(max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    .about-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .about-img:hover img { transform: scale(1.04); }
+    .about-text { }
+    .about-lead {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 2.2;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+    .about-body {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 2;
+    }
+
+    /* ════════════════════════
+       SERVICES
+    ════════════════════════ */
+    #services { background: var(--paper); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    @media(max-width: 768px) {
+      .services-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .service-card {
+      background: var(--white);
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .service-card:hover {
+      box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    }
+    .service-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .service-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .service-card:hover .service-img img { transform: scale(1.06); }
+    .service-body { padding: 28px 24px 32px; }
+    .service-num {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .service-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.9;
+    }
+
+    /* ════════════════════════
+       COMPANY
+    ════════════════════════ */
+    #company { background: var(--white); }
+    .company-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    .company-table tr {
+      border-bottom: 1px solid var(--warm);
+    }
+    .company-table th {
+      text-align: left;
+      padding: 20px 24px 20px 0;
+      width: 160px;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      vertical-align: top;
+    }
+    .company-table td {
+      padding: 20px 0;
+      color: var(--ink);
+      line-height: 1.8;
+    }
+    @media(max-width: 560px) {
+      .company-table th { width: 100px; font-size: 0.82rem; padding-right: 12px; }
+      .company-table td { font-size: 0.88rem; }
+    }
+
+    /* ════════════════════════
+       CONTACT
+    ════════════════════════ */
+    #contact {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    #contact .section-title { color: var(--paper); }
+    #contact .section-title::after { background: var(--gold-l); }
+    .contact-inner { max-width: 640px; }
+    .contact-lead {
+      font-size: 0.92rem;
+      color: rgba(245,242,237,0.7);
+      margin-bottom: 40px;
+      line-height: 2;
+    }
+    .form-group { margin-bottom: 24px; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,242,237,0.6);
+      margin-bottom: 8px;
+    }
+    .form-group label .required {
+      color: var(--gold-l);
+      margin-left: 4px;
+    }
+    .form-control {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--paper);
+      padding: 14px 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-control::placeholder { color: rgba(245,242,237,0.3); }
+    .form-control:focus { border-color: var(--gold-l); }
+    textarea.form-control { resize: vertical; min-height: 140px; }
+    .btn-submit {
+      display: inline-block;
+      padding: 16px 56px;
+      background: transparent;
+      border: 1px solid var(--gold-l);
+      color: var(--gold-l);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.92rem;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-submit:hover {
+      background: var(--gold-l);
+      color: var(--ink);
+    }
+
+    /* ════════════════════════
+       FOOTER
+    ════════════════════════ */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+    }
+    footer .footer-logo {
+      height: 40px;
+      width: auto;
+      opacity: 0.55;
+      margin: 0 auto 20px;
+      filter: invert(1);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <a href="#top">
+      <img src="logo.png" alt="株式会社勘兵衛" class="logo">
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav">
+      <a href="#about">会社について</a>
+      <a href="#services">事業内容</a>
+      <a href="#company">会社概要</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-sub">KANBEY Co., Ltd.</p>
+    <h1 class="hero-title serif">
+      時を超えた価値を、<br>次の世代へ。
+    </h1>
+    <div class="hero-line"></div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="images/about.jpg" alt="勘兵衛の建物">
+      </div>
+      <div class="about-text">
+        <h2 class="section-title serif">会社について</h2>
+        <p class="about-lead">
+          「勘兵衛」の名のもとに、<br>
+          不動産・フィットネス・茶の湯を通じて<br>
+          豊かな暮らしを支えてきました。
+        </p>
+        <p class="about-body">
+          株式会社勘兵衛は、長年にわたり地域に根ざした事業を展開してまいりました。不動産の賃貸・管理から、健康を支えるフィットネスクラブの経営、そして日本の伝統文化である茶事のイベント企画まで、多様な分野で皆さまの豊かな暮らしに貢献しています。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="section" id="services">
+  <div class="container">
+    <h2 class="section-title serif">事業内容</h2>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="images/realestate.jpg" alt="不動産賃貸・管理">
+        </div>
+        <div class="service-body">
+          <p class="service-num">SERVICE 01</p>
+          <h3 class="service-name">不動産賃貸・管理</h3>
+          <p class="service-desc">
+            自社保有の物件を直接賃貸・管理しています。入居者様と丁寧なコミュニケーションを取りながら、長くご安心いただける住まいの環境づくりを大切にしています。
+          </p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="images/garden.jpg" alt="フィットネスクラブ経営">
+        </div>
+        <div class="service-body">
+          <p class="service-num">SERVICE 02</p>
+          <h3 class="service-name">フィットネスクラブ経営</h3>
+          <p class="service-desc">
+            心身ともに健やかな暮らしを支える場所として、地域の皆さまに親しまれるフィットネス施設を運営しています。
+          </p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="images/tea_event.jpg" alt="茶事イベント企画運営">
+        </div>
+        <div class="service-body">
+          <p class="service-num">SERVICE 03</p>
+          <h3 class="service-name">茶事イベント企画運営</h3>
+          <p class="service-desc">
+            日本の美意識が凝縮された茶の湯の世界を、現代のイベントとして企画・運営。非日常のひとときをプロデュースします。
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPANY ── -->
+<section class="section" id="company">
+  <div class="container">
+    <h2 class="section-title serif">会社概要</h2>
+    <table class="company-table">
+      <tr>
+        <th>会社名</th>
+        <td>株式会社勘兵衛</td>
+      </tr>
+      <tr>
+        <th>設立</th>
+        <td>2013年12月13日</td>
+      </tr>
+      <tr>
+        <th>代表取締役</th>
+        <td>小口 彩子</td>
+      </tr>
+      <tr>
+        <th>所在地</th>
+        <td>〒919-2225<br>福井県大飯郡高浜町宮崎45-10</td>
+      </tr>
+      <tr>
+        <th>お問い合わせ</th>
+        <td>お問い合わせフォームよりご連絡ください</td>
+      </tr>
+      <tr>
+        <th>事業内容</th>
+        <td>
+          不動産賃貸・管理<br>
+          フィットネスクラブ経営<br>
+          茶事に関するイベント企画・運営
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <h2 class="section-title serif">お問い合わせ</h2>
+      <p class="contact-lead">
+        ご質問・ご相談はお気軽にお問い合わせください。<br>
+        担当者より折り返しご連絡いたします。
+      </p>
+      <form action="https://formsubmit.co/kanbeylab2025@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="【株式会社勘兵衛】お問い合わせが届きました">
+        <input type="hidden" name="_next" value="thanks.html">
+        <input type="hidden" name="_captcha" value="false">
+        <div class="form-group">
+          <label>お名前<span class="required">*</span></label>
+          <input type="text" name="name" class="form-control" placeholder="山田 太郎" required>
+        </div>
+        <div class="form-group">
+          <label>メールアドレス<span class="required">*</span></label>
+          <input type="email" name="email" class="form-control" placeholder="example@mail.com" required>
+        </div>
+        <div class="form-group">
+          <label>お電話番号</label>
+          <input type="tel" name="phone" class="form-control" placeholder="000-0000-0000">
+        </div>
+        <div class="form-group">
+          <label>お問い合わせ内容<span class="required">*</span></label>
+          <textarea name="message" class="form-control" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">送　信</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <img src="logo.png" alt="株式会社勘兵衛" class="footer-logo">
+  <p>&copy; 2024 株式会社勘兵衛 All Rights Reserved.</p>
+</footer>
+
+<script>
+  // hamburger menu
+  const btn = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  btn.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => nav.classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
