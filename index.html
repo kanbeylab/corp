@@ -246,10 +246,10 @@
     #services { background: var(--paper); }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 32px;
     }
-    @media(max-width: 768px) {
+    @media(max-width: 640px) {
       .services-grid { grid-template-columns: 1fr; gap: 24px; }
     }
     .service-card {
@@ -467,13 +467,13 @@
 
       <div class="service-card">
         <div class="service-img">
-          <img src="images/realestate.jpg" alt="不動産投資・管理">
+          <img src="images/realestate.jpg" alt="不動産賃貸・管理">
         </div>
         <div class="service-body">
           <p class="service-num">SERVICE 01</p>
-          <h3 class="service-name">不動産投資・管理</h3>
+          <h3 class="service-name">不動産賃貸・管理</h3>
           <p class="service-desc">
-            自社保有の物件を賃貸・管理しています。入居者様と丁寧なコミュニケーションを取りながら、長くご安心いただける住まいの環境づくりを大切にしています。
+            自社保有の物件を直接賃貸・管理しています。入居者様と丁寧なコミュニケーションを取りながら、長くご安心いただける住まいの環境づくりを大切にしています。
           </p>
         </div>
       </div>
@@ -500,6 +500,19 @@
           <h3 class="service-name">茶事イベント企画運営</h3>
           <p class="service-desc">
             日本の美意識が凝縮された茶の湯の世界を、現代のイベントとして企画・運営。非日常のひとときをプロデュースします。
+          </p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-img">
+          <img src="images/linkedin.jpg" alt="LinkedIn活用コンサルティング">
+        </div>
+        <div class="service-body">
+          <p class="service-num">SERVICE 04</p>
+          <h3 class="service-name">LinkedIn活用コンサルティング</h3>
+          <p class="service-desc">
+            ビジネスパーソンのためのLinkedIn戦略を個別サポート。プロフィール構築から情報発信・ネットワーク拡大まで、ビジネスの可能性を広げるお手伝いをします。
           </p>
         </div>
       </div>
@@ -538,7 +551,8 @@
         <td>
           不動産賃貸・管理<br>
           フィットネスクラブ経営<br>
-          茶事に関するイベント企画・運営
+          茶事に関するイベント企画・運営<br>
+          LinkedIn活用コンサルティング
         </td>
       </tr>
     </table>
@@ -598,3 +612,4 @@
 
 </body>
 </html>
+
